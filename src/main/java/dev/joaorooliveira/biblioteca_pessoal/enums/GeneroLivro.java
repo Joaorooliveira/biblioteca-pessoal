@@ -1,4 +1,24 @@
 package dev.joaorooliveira.biblioteca_pessoal.enums;
 
 public enum GeneroLivro {
+    FICCAO,
+    NAO_FICCAO,
+    ROMANCE,
+    FANTASIA,
+    MISTERIO,
+    TERROR,
+    AVENTURA,
+    BIOGRAFIA,
+    HISTORIA,
+    CIENCIA,
+    POESIA,
+    FICCAO_CIENTIFICA,
+    TECNOLOGIA_E_COMPUTACAO,
+    AUTOAJUDA,
+    HQ_E_MANGA,
+    INFANTIL,
+    FILOSOFIA,
+    SUSPENSE_E_THRILLER,
+    DIDATICO_ACADEMICO,
+    RELIGIAO_E_ESPIRITUALIDADE
 }
