@@ -1,5 +1,6 @@
 package dev.joaorooliveira.biblioteca_pessoal.dto;
 
+import dev.joaorooliveira.biblioteca_pessoal.domain.Autor;
 import dev.joaorooliveira.biblioteca_pessoal.domain.Livro;
 import dev.joaorooliveira.biblioteca_pessoal.enums.GeneroLivro;
 import jakarta.validation.constraints.NotBlank;
@@ -16,10 +17,8 @@ public record LivroRequestDTO(
         @NotBlank(message = "O título não pode ser nulo ou vazio")
         String titulo,
 
-        @Past(message = "O ano de publicação deve ser uma data passada")
         Integer anoPublicacao,
 
-        @Size(max = 100, message = "O gênero deve ter no máximo 100 caracteres")
         GeneroLivro genero,
 
         @Size(max = 255, message = "A editora deve ter no máximo 255 caracteres")
@@ -29,13 +28,14 @@ public record LivroRequestDTO(
         Long autorId
 ) {
 
-    public Livro toEntity() {
+    public Livro toEntity(Autor autor) {
         Livro livro = new Livro();
         livro.setIsbn(this.isbn);
         livro.setTitulo(this.titulo);
         livro.setAnoPublicacao(this.anoPublicacao);
         livro.setGenero(this.genero);
         livro.setEditora(this.editora);
+        livro.setAutor(autor);
         return livro;
     }
 
