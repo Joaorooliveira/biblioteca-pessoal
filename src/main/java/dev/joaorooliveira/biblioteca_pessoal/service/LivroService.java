@@ -6,6 +6,8 @@ import dev.joaorooliveira.biblioteca_pessoal.dto.LivroRequestDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.LivroResponseDTO;
 import dev.joaorooliveira.biblioteca_pessoal.repository.AutorRepository;
 import dev.joaorooliveira.biblioteca_pessoal.repository.LivroRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +30,7 @@ public class LivroService {
         return LivroResponseDTO.fromEntity(livro);
     }
 
+    public Page<LivroResponseDTO> listarLivros(Pageable pageable,) {}
 
     public LivroResponseDTO buscarLivroPorId(Long id) {
         Livro livro = livroRepository.findById(id).orElseThrow(
