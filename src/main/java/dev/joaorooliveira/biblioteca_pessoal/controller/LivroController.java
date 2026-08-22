@@ -42,4 +42,9 @@ public class LivroController {
                                                          @PageableDefault(size = 10) Pageable pageable) {
         return ResponseEntity.ok(livroService.listarLivros(pageable, filtro));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<LivroResponseDTO> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(livroService.buscarLivroPorId(id));
+    }
 }
