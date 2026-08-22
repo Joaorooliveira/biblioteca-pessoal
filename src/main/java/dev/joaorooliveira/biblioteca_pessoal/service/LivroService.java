@@ -2,6 +2,7 @@ package dev.joaorooliveira.biblioteca_pessoal.service;
 
 import dev.joaorooliveira.biblioteca_pessoal.domain.Autor;
 import dev.joaorooliveira.biblioteca_pessoal.domain.Livro;
+import dev.joaorooliveira.biblioteca_pessoal.dto.LivroFiltroRequest;
 import dev.joaorooliveira.biblioteca_pessoal.dto.LivroRequestDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.LivroResponseDTO;
 import dev.joaorooliveira.biblioteca_pessoal.repository.AutorRepository;
@@ -30,7 +31,7 @@ public class LivroService {
         return LivroResponseDTO.fromEntity(livro);
     }
 
-    public Page<LivroResponseDTO> listarLivros(Pageable pageable,) {}
+    public Page<LivroResponseDTO> listarLivros(Pageable pageable, LivroFiltroRequest filtro) {}
 
     public LivroResponseDTO buscarLivroPorId(Long id) {
         Livro livro = livroRepository.findById(id).orElseThrow(
