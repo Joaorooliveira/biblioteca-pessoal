@@ -25,9 +25,15 @@ public class AutorService {
         Autor autor = autorRepository.save(dto.toEntity());
         return AutorResponseDTO.fromEntity(autor);
     }
-    public Page<AutorResponseDTO> buscarLivros(AutorFiltroRequestDTO filtro, Pageable pageable) {
+    public Page<AutorResponseDTO> buscarAutores(AutorFiltroRequestDTO filtro, Pageable pageable) {
         return autorRepository.findAll(AutorSpecification.comFiltros(filtro), pageable)
                 .map(AutorResponseDTO::fromEntity);
+    }
+
+    public AutorResponseDTO buscarAutorPorId(Long id) {
+        Autor autor = autorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Autor não encontrado"));
+        return AutorResponseDTO.fromEntity(autor);
     }
 
 
