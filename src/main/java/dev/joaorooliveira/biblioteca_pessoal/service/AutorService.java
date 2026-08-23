@@ -1,10 +1,12 @@
 package dev.joaorooliveira.biblioteca_pessoal.service;
 
 import dev.joaorooliveira.biblioteca_pessoal.domain.Autor;
+import dev.joaorooliveira.biblioteca_pessoal.domain.Livro;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorFiltroRequestDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorRequestDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorResponseDTO;
 import dev.joaorooliveira.biblioteca_pessoal.repository.AutorRepository;
+import dev.joaorooliveira.biblioteca_pessoal.repository.LivroRepository;
 import dev.joaorooliveira.biblioteca_pessoal.specification.AutorSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,9 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class AutorService {
 
     private final AutorRepository autorRepository;
+    private final LivroRepository livroRepository;
 
-    public AutorService(AutorRepository autorRepository) {
+    public AutorService(AutorRepository autorRepository, LivroRepository livroRepository) {
         this.autorRepository = autorRepository;
+        this.livroRepository = livroRepository;
     }
 
     @Transactional
@@ -34,6 +38,15 @@ public class AutorService {
         Autor autor = autorRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Autor não encontrado"));
         return AutorResponseDTO.fromEntity(autor);
+    }
+
+    public void deletarAutor(Long id) {
+        Autor autor = autorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Autor não encontrado"));
+        if (livroRepository.existsByAutorId(id)) {
+            throw new RuntimeException("Não é possível excluir o autor, pois ele possui livros cadastrados.");
+        }
+        autorRepository.delete(autor);
     }
 
 
