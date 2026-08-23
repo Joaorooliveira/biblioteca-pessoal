@@ -1,9 +1,13 @@
 package dev.joaorooliveira.biblioteca_pessoal.service;
 
 import dev.joaorooliveira.biblioteca_pessoal.domain.Autor;
+import dev.joaorooliveira.biblioteca_pessoal.dto.AutorFiltroRequestDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorRequestDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorResponseDTO;
 import dev.joaorooliveira.biblioteca_pessoal.repository.AutorRepository;
+import dev.joaorooliveira.biblioteca_pessoal.specification.AutorSpecification;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +25,11 @@ public class AutorService {
         Autor autor = autorRepository.save(dto.toEntity());
         return AutorResponseDTO.fromEntity(autor);
     }
+    public Page<AutorResponseDTO> buscarLivros(AutorFiltroRequestDTO filtro, Pageable pageable) {
+        return autorRepository.findAll(AutorSpecification.comFiltros(filtro), pageable)
+                .map(AutorResponseDTO::fromEntity);
+    }
+
 
 
 

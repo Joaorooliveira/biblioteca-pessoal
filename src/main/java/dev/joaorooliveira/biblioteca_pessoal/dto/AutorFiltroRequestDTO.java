@@ -2,7 +2,7 @@ package dev.joaorooliveira.biblioteca_pessoal.dto;
 
 import java.time.LocalDate;
 
-public record AutorFiltroRequest(
+public record AutorFiltroRequestDTO(
 
         String nome,
         String nacionalidade,
