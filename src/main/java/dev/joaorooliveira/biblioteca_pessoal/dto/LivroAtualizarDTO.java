@@ -1,8 +1,9 @@
 package dev.joaorooliveira.biblioteca_pessoal.dto;
 
-import dev.joaorooliveira.biblioteca_pessoal.domain.Autor;
 import dev.joaorooliveira.biblioteca_pessoal.domain.Livro;
 import dev.joaorooliveira.biblioteca_pessoal.enums.GeneroLivro;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 
 public record LivroAtualizarDTO(
@@ -13,7 +14,8 @@ public record LivroAtualizarDTO(
         @Size(min = 1, max = 255, message = "O título deve ter entre 1 e 255 caracteres")
         String titulo,
 
-        @Size(max = 4, message = "O ano de publicação deve ter no máximo 4 caracteres")
+        @Min(value = 0, message = "O ano de publicação deve ser maior ou igual a 0")
+        @Max(value = 9999, message = "O ano de publicação deve ser menor ou igual a 9999")
         Integer anoPublicacao,
 
         @Size(max = 255, message = "A editora deve ter no máximo 255 caracteres")
@@ -21,7 +23,6 @@ public record LivroAtualizarDTO(
 
         Long autorId,
 
-        @Size(max = 100, message = "O gênero deve ter no máximo 100 caracteres")
         GeneroLivro genero
 ) {
 
