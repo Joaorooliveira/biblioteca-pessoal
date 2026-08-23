@@ -2,6 +2,7 @@ package dev.joaorooliveira.biblioteca_pessoal.service;
 
 import dev.joaorooliveira.biblioteca_pessoal.domain.Autor;
 import dev.joaorooliveira.biblioteca_pessoal.domain.Livro;
+import dev.joaorooliveira.biblioteca_pessoal.dto.LivroAtualizarDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.LivroFiltroRequest;
 import dev.joaorooliveira.biblioteca_pessoal.dto.LivroRequestDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.LivroResponseDTO;
@@ -48,5 +49,19 @@ public class LivroService {
         Livro livro = livroRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Livro não encontrado"));
         livroRepository.delete(livro);
+    }
+
+    @Transactional
+    public LivroResponseDTO atualizarLivro(Long id, LivroAtualizarDTO dto) {
+        Livro livro = livroRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Livro não encontrado"));
+        dto.preencher(livro);
+        if (dto.autorId() != null) {
+            Autor autor = autorRepository.findById(dto.autorId()).orElseThrow(
+                    () -> new RuntimeException("Autor não encontrado"));
+            livro.setAutor(autor);
+        }
+        livroRepository.save(livro);
+        return LivroResponseDTO.fromEntity(livro);
     }
 }
