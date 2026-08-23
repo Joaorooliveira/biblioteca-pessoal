@@ -1,5 +1,6 @@
 package dev.joaorooliveira.biblioteca_pessoal.controller;
 
+import dev.joaorooliveira.biblioteca_pessoal.dto.LivroAtualizarDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.LivroFiltroRequest;
 import dev.joaorooliveira.biblioteca_pessoal.dto.LivroRequestDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.LivroResponseDTO;
@@ -53,4 +54,12 @@ public class LivroController {
         livroService.deletarLivro(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<LivroResponseDTO> atualizar(@PathVariable Long id,
+                                                      @RequestBody @Valid LivroAtualizarDTO dto) {
+        LivroResponseDTO livroResponseDTO = livroService.atualizarLivro(id, dto);
+        return ResponseEntity.ok(livroResponseDTO);
+    }
 }
+
