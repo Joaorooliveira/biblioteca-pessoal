@@ -42,4 +42,11 @@ public class LivroService {
                 () -> new RuntimeException("Livro não encontrado"));
         return LivroResponseDTO.fromEntity(livro);
     }
+
+    @Transactional
+    public void deletarLivro(Long id) {
+        Livro livro = livroRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Livro não encontrado"));
+        livroRepository.delete(livro);
+    }
 }
