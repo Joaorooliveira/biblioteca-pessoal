@@ -1,5 +1,6 @@
 package dev.joaorooliveira.biblioteca_pessoal.controller;
 
+import dev.joaorooliveira.biblioteca_pessoal.dto.AutorAtualizarDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorFiltroRequestDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorRequestDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorResponseDTO;
@@ -46,5 +47,12 @@ public class AutorController {
     public ResponseEntity<AutorResponseDTO> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(autorService.buscarAutorPorId(id));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<AutorResponseDTO> atualizar(@PathVariable Long id, @RequestBody @Valid AutorAtualizarDTO dto){
+        return ResponseEntity.ok(autorService.atualizarAutor(id, dto));
+    }
+
+
 }
 
