@@ -2,6 +2,7 @@ package dev.joaorooliveira.biblioteca_pessoal.service;
 
 import dev.joaorooliveira.biblioteca_pessoal.domain.Autor;
 import dev.joaorooliveira.biblioteca_pessoal.domain.Livro;
+import dev.joaorooliveira.biblioteca_pessoal.dto.AutorAtualizarDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorFiltroRequestDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorRequestDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorResponseDTO;
@@ -40,6 +41,7 @@ public class AutorService {
         return AutorResponseDTO.fromEntity(autor);
     }
 
+    @Transactional
     public void deletarAutor(Long id) {
         Autor autor = autorRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Autor não encontrado"));
@@ -47,6 +49,15 @@ public class AutorService {
             throw new RuntimeException("Não é possível excluir o autor, pois ele possui livros cadastrados.");
         }
         autorRepository.delete(autor);
+    }
+
+    @Transactional
+    public AutorResponseDTO atualizarAutor(Long id, AutorAtualizarDTO dto){
+        Autor autor = autorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Autor não encontrado"));
+        dto.preencher(autor);
+        autor = autorRepository.save(autor);
+        return AutorResponseDTO.fromEntity(autor);
     }
 
 

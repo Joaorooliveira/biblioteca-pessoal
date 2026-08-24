@@ -21,7 +21,7 @@ public record AutorAtualizarDTO(
         return autor;
     }
 
-    private void preencher(Autor autor) {
+    public void preencher(Autor autor) {
         if (nome != null) {
             autor.setNome(nome);
         }
