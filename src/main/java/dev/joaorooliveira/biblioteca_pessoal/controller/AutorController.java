@@ -41,5 +41,10 @@ public class AutorController {
                                                          @PageableDefault(size = 10) Pageable pageable) {
         return ResponseEntity.ok(autorService.buscarAutores(filtro, pageable));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AutorResponseDTO> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(autorService.buscarAutorPorId(id));
+    }
 }
 
