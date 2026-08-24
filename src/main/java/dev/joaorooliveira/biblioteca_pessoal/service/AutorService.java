@@ -60,7 +60,4 @@ public class AutorService {
         return AutorResponseDTO.fromEntity(autor);
     }
 
-
-
-
 }
