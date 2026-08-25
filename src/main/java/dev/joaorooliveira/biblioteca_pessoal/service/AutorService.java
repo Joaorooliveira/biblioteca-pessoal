@@ -6,6 +6,8 @@ import dev.joaorooliveira.biblioteca_pessoal.dto.AutorAtualizarDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorFiltroRequestDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorRequestDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorResponseDTO;
+import dev.joaorooliveira.biblioteca_pessoal.exception.EntidadeNaoEncontradaException;
+import dev.joaorooliveira.biblioteca_pessoal.exception.RegraNegocioException;
 import dev.joaorooliveira.biblioteca_pessoal.projection.QuantidadeLivrosPorAutorProjection;
 import dev.joaorooliveira.biblioteca_pessoal.repository.AutorRepository;
 import dev.joaorooliveira.biblioteca_pessoal.repository.LivroRepository;
@@ -40,16 +42,16 @@ public class AutorService {
 
     public AutorResponseDTO buscarAutorPorId(Long id) {
         Autor autor = autorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Autor não encontrado"));
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Autor não encontrado"));
         return AutorResponseDTO.fromEntity(autor);
     }
 
     @Transactional
     public void deletarAutor(Long id) {
         Autor autor = autorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Autor não encontrado"));
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Autor não encontrado"));
         if (livroRepository.existsByAutorId(id)) {
-            throw new RuntimeException("Não é possível excluir o autor, pois ele possui livros cadastrados.");
+            throw new RegraNegocioException("Não é possível excluir o autor, pois ele possui livros cadastrados.");
         }
         autorRepository.delete(autor);
     }
@@ -57,7 +59,7 @@ public class AutorService {
     @Transactional
     public AutorResponseDTO atualizarAutor(Long id, AutorAtualizarDTO dto){
         Autor autor = autorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Autor não encontrado"));
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Autor não encontrado"));
         dto.preencher(autor);
         autor = autorRepository.save(autor);
         return AutorResponseDTO.fromEntity(autor);
@@ -69,7 +71,7 @@ public class AutorService {
 
     public QuantidadeLivrosPorAutorProjection quantidadeLivrosPorAutorId(Long id) {
         return autorRepository.quantidadeLivrosPorAutorId(id)
-                .orElseThrow(() -> new RuntimeException("Autor não encontrado"));
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Autor não encontrado"));
     }
 
 }
