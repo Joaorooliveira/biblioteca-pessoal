@@ -5,8 +5,10 @@ import dev.joaorooliveira.biblioteca_pessoal.projection.QuantidadeLivrosPorAutor
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AutorRepository extends JpaRepository<Autor, Long>, JpaSpecificationExecutor<Autor> {
 
@@ -22,4 +24,17 @@ public interface AutorRepository extends JpaRepository<Autor, Long>, JpaSpecific
             nativeQuery = true
     )
     List<QuantidadeLivrosPorAutorProjection> quantidadeLivrosPorAutor();
+
+    @Query(value = """
+            SELECT a.nome, COUNT(l.id) AS quantidade
+            FROM autores a
+            LEFT JOIN livros l ON a.id = l.autor_id
+            WHERE a.id = :autorId
+            GROUP BY a.nome
+            """,
+            nativeQuery = true
+    )
+    Optional<QuantidadeLivrosPorAutorProjection> quantidadeLivrosPorAutorId(@Param("autorId") Long id);
+
+
 }
