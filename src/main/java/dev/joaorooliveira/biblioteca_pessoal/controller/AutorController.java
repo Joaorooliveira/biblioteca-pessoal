@@ -66,5 +66,10 @@ public class AutorController {
         return ResponseEntity.ok(autorService.quantidadeLivrosPorAutor());
     }
 
+    @GetMapping("/{id}/quantidade-livros")
+    public ResponseEntity<QuantidadeLivrosPorAutorProjection> quantidadeLivrosPorAutor(@PathVariable Long id) {
+        return ResponseEntity.ok(autorService.quantidadeLivrosPorAutorId(id));
+    }
+
 }
 
