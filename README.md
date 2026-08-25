@@ -1,17 +1,17 @@
 # 📚 Biblioteca Pessoal API
 
-Uma API RESTful desenvolvida para o gerenciamento de uma biblioteca pessoal[cite: 1]. Este projeto permite o cadastro, controle e consulta de autores e livros, utilizando boas práticas de desenvolvimento web e arquitetura em camadas[cite: 1].
+Uma API RESTful desenvolvida para o gerenciamento de uma biblioteca pessoal. Este projeto permite o cadastro, controle e consulta de autores e livros, utilizando boas práticas de desenvolvimento web e arquitetura em camadas.
 
 ## 🚀 Funcionalidades
 
 A aplicação expõe endpoints para as seguintes operações:
 
-*   **Gerenciamento de Autores:** Cadastro, listagem paginada, atualização, exclusão e busca por ID[cite: 1].
-*   **Gerenciamento de Livros:** Cadastro, listagem dinâmica com filtros avançados, atualização e exclusão[cite: 1].
+*   **Gerenciamento de Autores:** Cadastro, listagem paginada, atualização, exclusão e busca por ID.
+*   **Gerenciamento de Livros:** Cadastro, listagem dinâmica com filtros avançados, atualização e exclusão.
 *   **Consultas Avançadas:** 
-    *   Filtros dinâmicos utilizando Spring Data JPA Specifications (`AutorSpecification` e `LivroSpecification`)[cite: 1].
+    *   Filtros dinâmicos utilizando Spring Data JPA Specifications (`AutorSpecification` e `LivroSpecification`).
     *   Relatórios otimizados utilizando Projections nativas, como a contagem de livros por autor (`QuantidadeLivrosPorAutorProjection`)[cite: 1].
-*   **Tratamento de Erros Global:** Uso de `@RestControllerAdvice` para capturar exceções padronizadas, incluindo regras de negócio, validações de DTOs (`@Valid`) e retornos precisos de status HTTP (400, 404, 405, 409, 500)[cite: 1].
+*   **Tratamento de Erros Global:** Uso de `@RestControllerAdvice` para capturar exceções padronizadas, incluindo regras de negócio, validações de DTOs (`@Valid`) e retornos precisos de status HTTP (400, 404, 405, 409, 500).
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -19,10 +19,10 @@ Este projeto foi construído utilizando as seguintes tecnologias e frameworks:
 
 *   **Java**
 *   **Spring Boot** (Web, Data JPA, Validation)
-*   **Maven** (Gerenciamento de dependências e build)[cite: 1]
+*   **Maven** (Gerenciamento de dependências e build).
 *   **PostgreSQL** (Banco de dados relacional)
-*   **Flyway** (Controle de versionamento do banco de dados com scripts SQL)[cite: 1]
-*   **Padrões de Projeto:** DTO (Data Transfer Object), Repository, Service, Controller[cite: 1].
+*   **Flyway** (Controle de versionamento do banco de dados com scripts SQL).
+*   **Padrões de Projeto:** DTO (Data Transfer Object), Repository, Service, Controller.
 
 ## 📂 Estrutura do Banco de Dados (Migrations)
 
