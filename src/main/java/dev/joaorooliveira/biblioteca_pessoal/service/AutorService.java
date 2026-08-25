@@ -6,6 +6,7 @@ import dev.joaorooliveira.biblioteca_pessoal.dto.AutorAtualizarDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorFiltroRequestDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorRequestDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorResponseDTO;
+import dev.joaorooliveira.biblioteca_pessoal.projection.QuantidadeLivrosPorAutorProjection;
 import dev.joaorooliveira.biblioteca_pessoal.repository.AutorRepository;
 import dev.joaorooliveira.biblioteca_pessoal.repository.LivroRepository;
 import dev.joaorooliveira.biblioteca_pessoal.specification.AutorSpecification;
@@ -13,6 +14,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class AutorService {
@@ -58,6 +61,10 @@ public class AutorService {
         dto.preencher(autor);
         autor = autorRepository.save(autor);
         return AutorResponseDTO.fromEntity(autor);
+    }
+
+    public List<QuantidadeLivrosPorAutorProjection> quantidadeLivrosPorAutor() {
+        return autorRepository.quantidadeLivrosPorAutor();
     }
 
 }

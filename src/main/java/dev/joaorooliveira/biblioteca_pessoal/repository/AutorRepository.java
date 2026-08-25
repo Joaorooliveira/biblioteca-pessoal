@@ -12,11 +12,12 @@ public interface AutorRepository extends JpaRepository<Autor, Long>, JpaSpecific
 
 
     @Query(value = """
-            SELECT a.nome,count(l) AS quantidade
+            SELECT a.nome,count(l.id) AS quantidade
             FROM livros l
-            JOIN autores a
+            LEFT JOIN autores a
             ON l.autor_id = a.id
             GROUP BY nome
+            ORDER BY quantidade DESC
             """,
             nativeQuery = true
     )
