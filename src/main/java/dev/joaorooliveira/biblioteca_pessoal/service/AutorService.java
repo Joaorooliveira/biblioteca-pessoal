@@ -67,4 +67,9 @@ public class AutorService {
         return autorRepository.quantidadeLivrosPorAutor();
     }
 
+    public QuantidadeLivrosPorAutorProjection quantidadeLivrosPorAutorId(Long id) {
+        return autorRepository.quantidadeLivrosPorAutorId(id)
+                .orElseThrow(() -> new RuntimeException("Autor não encontrado"));
+    }
+
 }
