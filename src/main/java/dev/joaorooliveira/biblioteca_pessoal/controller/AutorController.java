@@ -4,6 +4,7 @@ import dev.joaorooliveira.biblioteca_pessoal.dto.AutorAtualizarDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorFiltroRequestDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorRequestDTO;
 import dev.joaorooliveira.biblioteca_pessoal.dto.AutorResponseDTO;
+import dev.joaorooliveira.biblioteca_pessoal.projection.QuantidadeLivrosPorAutorProjection;
 import dev.joaorooliveira.biblioteca_pessoal.service.AutorService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/autores")
@@ -59,6 +61,10 @@ public class AutorController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/quantidade-livros")
+    public ResponseEntity<List<QuantidadeLivrosPorAutorProjection>> quantidadeLivrosPorAutor() {
+        return ResponseEntity.ok(autorService.quantidadeLivrosPorAutor());
+    }
 
 }
 
